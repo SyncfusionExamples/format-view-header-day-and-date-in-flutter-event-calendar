@@ -1,2 +1,1 @@
-# format-view-header-day-and-date-in-flutter-event-calendar
-How to format the view header day and date in the Flutter event calendar (SfCalendar)
+**[View document in Syncfusion Flutter Knowledge base](https://www.syncfusion.com/kb/12339/how-to-format-the-view-header-day-and-date-in-the-flutter-event-calendar-sfcalendar)**
