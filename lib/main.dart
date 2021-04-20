@@ -12,21 +12,12 @@ class ViewHeaderTextFormat extends StatefulWidget {
 }
 
 class CalendarExample extends State<ViewHeaderTextFormat> {
-  CalendarController _controller;
-  String _dayFormat, _dateFormat;
-  List<CalendarView> _allowedViews;
-  CalendarDataSource _dataSource;
+  final CalendarController _controller = CalendarController();
+  String _dayFormat = 'EEE', _dateFormat = 'dd';
+  CalendarDataSource? _dataSource;
 
   @override
   initState() {
-    _controller = CalendarController();
-    _dayFormat = 'EEE';
-    _dateFormat = 'dd';
-    _allowedViews = [
-      CalendarView.day,
-      CalendarView.week,
-      CalendarView.workWeek
-    ];
     _dataSource = _getCalendarDataSource();
     super.initState();
   }
@@ -39,7 +30,11 @@ class CalendarExample extends State<ViewHeaderTextFormat> {
           body: SafeArea(
         child: SfCalendar(
           view: CalendarView.week,
-          allowedViews: _allowedViews,
+          allowedViews: [
+            CalendarView.day,
+            CalendarView.week,
+            CalendarView.workWeek
+          ],
           controller: _controller,
           dataSource: _dataSource,
           timeSlotViewSettings: TimeSlotViewSettings(
@@ -70,7 +65,7 @@ class CalendarExample extends State<ViewHeaderTextFormat> {
 
   void viewChanged(ViewChangedDetails viewChangedDetails) {
     if (_controller.view == CalendarView.day) {
-      SchedulerBinding.instance.addPostFrameCallback((Duration duration) {
+      SchedulerBinding.instance!.addPostFrameCallback((Duration duration) {
         if (_dayFormat != 'EEEEE' || _dateFormat != 'dd') {
           setState(() {
             _dayFormat = 'EEEEE';
@@ -81,7 +76,7 @@ class CalendarExample extends State<ViewHeaderTextFormat> {
         }
       });
     } else {
-      SchedulerBinding.instance.addPostFrameCallback((Duration duration) {
+      SchedulerBinding.instance!.addPostFrameCallback((Duration duration) {
         if (_dayFormat != 'EEE' || _dateFormat != 'dd') {
           setState(() {
             _dayFormat = 'EEE';
