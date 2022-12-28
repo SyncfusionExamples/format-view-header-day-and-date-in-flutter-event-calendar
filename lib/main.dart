@@ -3,10 +3,12 @@ import 'package:flutter/scheduler.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 void main() {
-  return runApp(ViewHeaderTextFormat());
+  return runApp(const ViewHeaderTextFormat());
 }
 
 class ViewHeaderTextFormat extends StatefulWidget {
+  const ViewHeaderTextFormat({super.key});
+
   @override
   State<StatefulWidget> createState() => CalendarExample();
 }
@@ -28,20 +30,20 @@ class CalendarExample extends State<ViewHeaderTextFormat> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
           body: SafeArea(
-        child: SfCalendar(
-          view: CalendarView.week,
-          allowedViews: [
-            CalendarView.day,
-            CalendarView.week,
-            CalendarView.workWeek
-          ],
-          controller: _controller,
-          dataSource: _dataSource,
-          timeSlotViewSettings: TimeSlotViewSettings(
-              dateFormat: _dateFormat, dayFormat: _dayFormat),
-          onViewChanged: viewChanged,
-        ),
-      )),
+            child: SfCalendar(
+              view: CalendarView.week,
+              allowedViews: const [
+                CalendarView.day,
+                CalendarView.week,
+                CalendarView.workWeek
+              ],
+              controller: _controller,
+              dataSource: _dataSource,
+              timeSlotViewSettings: TimeSlotViewSettings(
+                  dateFormat: _dateFormat, dayFormat: _dayFormat),
+              onViewChanged: viewChanged,
+            ),
+          )),
     );
   }
 
@@ -49,13 +51,13 @@ class CalendarExample extends State<ViewHeaderTextFormat> {
     List<Appointment> appointments = <Appointment>[];
     appointments.add(Appointment(
       startTime: DateTime.now(),
-      endTime: DateTime.now().add(Duration(hours: 2)),
+      endTime: DateTime.now().add(const Duration(hours: 2)),
       subject: 'Meeting',
       color: Colors.greenAccent,
     ));
     appointments.add(Appointment(
-      startTime: DateTime.now().add(Duration(hours: 2)),
-      endTime: DateTime.now().add(Duration(hours: 3)),
+      startTime: DateTime.now().add(const Duration(hours: 2)),
+      endTime: DateTime.now().add(const Duration(hours: 3)),
       subject: 'Planning',
       color: Colors.green,
     ));
@@ -65,7 +67,7 @@ class CalendarExample extends State<ViewHeaderTextFormat> {
 
   void viewChanged(ViewChangedDetails viewChangedDetails) {
     if (_controller.view == CalendarView.day) {
-      SchedulerBinding.instance!.addPostFrameCallback((Duration duration) {
+      SchedulerBinding.instance.addPostFrameCallback((Duration duration) {
         if (_dayFormat != 'EEEEE' || _dateFormat != 'dd') {
           setState(() {
             _dayFormat = 'EEEEE';
@@ -76,7 +78,7 @@ class CalendarExample extends State<ViewHeaderTextFormat> {
         }
       });
     } else {
-      SchedulerBinding.instance!.addPostFrameCallback((Duration duration) {
+      SchedulerBinding.instance.addPostFrameCallback((Duration duration) {
         if (_dayFormat != 'EEE' || _dateFormat != 'dd') {
           setState(() {
             _dayFormat = 'EEE';
